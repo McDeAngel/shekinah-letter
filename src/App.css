@@ -1,0 +1,230 @@
+:root {
+  --text: #1e3a5f;
+  --accent: #2E8BC0;
+  --muted: #4a7c9e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: linear-gradient(135deg, #87CEEB 0%, #5FB8E8 100%);
+  background-image: url('/background.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.65;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  cursor: pointer;
+  transition: opacity 1.5s ease, visibility 1.5s;
+}
+
+.overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.overlay.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.overlay-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 1px;
+  animation: pulse 2s infinite ease-in-out;
+  user-select: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+/* Main Container */
+.container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s ease 0.6s, visibility 1.5s ease 0.6s;
+}
+
+.container.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Falling Leaves */
+.falling-leaves {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  top: -50px;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg) translateX(50px);
+    opacity: 0.3;
+  }
+}
+
+/* Header & Footer */
+.header-box, .footer-box {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.8rem 2rem;
+  border-radius: 12px;
+  margin: 0.5rem 0;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+}
+
+.title {
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.hearts {
+  color: var(--accent);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* Letter */
+.letter {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  padding: 2rem 1.8rem;
+  width: 92%;
+  max-width: 650px;
+  text-align: left;
+  margin: 0.5rem auto;
+}
+
+.greeting {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: var(--accent);
+}
+
+.letter p {
+  margin-bottom: 1.1rem;
+  font-size: 1rem;
+  color: var(--text);
+  text-align: justify;
+  hyphens: auto;
+  line-height: 1.6;
+}
+
+.conclusion {
+  padding-top: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.conclusion h3 {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  font-size: 1.05rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.conclusion p {
+  text-align: justify;
+  margin-bottom: 1rem;
+}
+
+.sign {
+  margin-top: 1rem;
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body { padding: 1rem 0.5rem; }
+  .container { padding: 1rem 0.5rem; }
+  .letter { padding: 1.5rem 1.2rem; width: 95%; }
+  .header-box, .footer-box { padding: 0.7rem 1.2rem; width: 95%; }
+  .title { font-size: 1.05rem; }
+  .greeting { font-size: 1rem; }
+  .letter p { font-size: 0.92rem; }
+  .leaf { width: 25px; height: 25px; }
+}
+
+@media (max-width: 480px) {
+  .letter { padding: 1.2rem 0.9rem; width: 96%; }
+  .greeting { font-size: 0.95rem; }
+  .letter p { font-size: 0.88rem; margin-bottom: 0.9rem; }
+  .conclusion h3 { font-size: 0.95rem; }
+  .header-box, .footer-box { padding: 0.6rem 1rem; }
+  .title { font-size: 1rem; }
+}
