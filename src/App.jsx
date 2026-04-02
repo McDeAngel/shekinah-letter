@@ -8,8 +8,14 @@ function App() {
 
   const handleStart = () => {
     if (showOverlay) {
-      pianoRef.current?.play().catch(() => {})
-      voiceRef.current?.play().catch(() => {})
+      if (pianoRef.current) {
+        pianoRef.current.volume = 0.4;
+        pianoRef.current.play().catch(() => {});
+      }
+      if (voiceRef.current) {
+        voiceRef.current.volume = 1.0;
+        voiceRef.current.play().catch(() => {});
+      }
       setShowOverlay(false)
     }
   }
