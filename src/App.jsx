@@ -3,18 +3,21 @@ import './App.css'
 
 function App() {
   const [showOverlay, setShowOverlay] = useState(true)
-  const audioRef = useRef(null)
+  const pianoRef = useRef(null)
+  const voiceRef = useRef(null)
 
   const handleStart = () => {
     if (showOverlay) {
-      audioRef.current?.play().catch(() => {})
+      pianoRef.current?.play().catch(() => {})
+      voiceRef.current?.play().catch(() => {})
       setShowOverlay(false)
     }
   }
 
   return (
     <>
-      <audio ref={audioRef} src="/piano.mp3" loop playsInline />
+      <audio ref={pianoRef} src="/piano.mp3" loop playsInline />
+      <audio ref={voiceRef} src="/voice.mp3" playsInline />
 
       <div
         className={`overlay ${showOverlay ? 'visible' : 'hidden'}`}
